@@ -1,5 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
+
 ;
 ;	Autocompilación
 ;
@@ -7,13 +8,22 @@ Compiler:= "Ahk2Exe.exe"
 If ( ! A_IsCompiled ) {
 	Autocompilacion()
 }
+
 ;
 ;	Comprobamos que VSCompilerAHK.exe reside donde Ahk2Exe.exe
 ;
-
 If ( ! FileExist(Compiler) ) {
 	ConsolaVSC("❌ No se encuentra el compilador " Compiler " junto a VSCompilerAHK.exe.`nCancelado.", 4)
 }
+
+;
+;	Comprobamos que la llamada a VSCompilerAHK.exe incluye parámetro con la ruta del AHK a compilar
+;
+if ( A_Args.Length < 1 ) {
+	MsgBox("❌ VSCompilerAHK.exe no parece haber sido invocado desde VS Code.`nCancelado.")
+	Exitapp 3
+}
+
 ;
 ;	Comprobamos que el AHK a compilar existe (básicamente que fue guardado)
 ;
@@ -23,6 +33,7 @@ If ( ! FileExist(Main) ) {
 }
 SplitPath(Main, &ScriptAHK, &ScriptDir)
 Proyecto := StrReplace(ScriptAHK, ".ahk", "")
+
 ;
 ;	Comprobamos si está definida RutaGeneral en VSCompilerAHK.cfg, tras lo cual y si es así,
 ;	validamos que el proyecto reside en una Subcarpeta con su mismo nombre
@@ -36,6 +47,7 @@ If ( RutaGral != "" && InStr(ScriptDir, RutaGral, False) ) {
 					"Cancelado.", 1)
 	}
 }
+
 ;
 ;	Comprobamos que el EXE se obtiene correctamente
 ;
@@ -50,6 +62,7 @@ if ( FechaExe < FechaInicio ) {
     ConsolaVSC("❌ El ejecutable no fue actualizado en esta compilación.`n" .
                "Fecha .exe: " FechaExe " vs Inicio: " FechaInicio, 2)
 }
+
 ;
 ;	Éxito, EXE obtenido
 ;
