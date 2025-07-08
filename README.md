@@ -105,4 +105,3 @@ Debes configurar en visual Studio Code la directiva para Code Runner de la sigui
 }
 ajustando la ruta D:\Autohotkey\Compiler a donde resida tu Ahk2Exe.exe
 
----
