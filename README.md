@@ -1,4 +1,4 @@
-# 📦 VSCompilerAHK
+﻿# 📦 VSCompilerAHK
 
 Sistema de compilación de scripts AutoHotkey v2 para Visual Studio Code usando Code Runner.
 
@@ -30,10 +30,11 @@ Sistema de compilación de scripts AutoHotkey v2 para Visual Studio Code usando 
 
 1. Clona o descarga este repositorio.
 2. Coloca los siguientes archivos junto a `Ahk2Exe.exe`:
-   - `VSCompilerAHK.exe`
    - `VSCompilerAHK.ahk`
-   - `VSCompilerAHK.cfg` (opcional)
-3. Configura `settings.json` en Visual Studio Code: (la direciva en Nota Final)
+   - `VSCompilerAHK.cfg` (opcional, para Ruta General de proyectos)
+   - 'VSCompilerAHK.RME' (opcional, documentación en local)
+3. Ejecuta `VSCompilerAHK.ahk` lo que generará `VSCompilerAHK.exe`
+4. Configura `settings.json` en Visual Studio Code: (la direciva en Nota Final)
 
 ---
 
@@ -43,7 +44,7 @@ Nombre: VSCompilerAHK.cfg
 
 Ejemplo: RutaGeneral=D:\AHK Proyectos
 
-Esto permite validar que el AHK principal esté dentro de una subcarpeta con el mismo nombre.
+Esto permite validar que el AHK principal está dentro de una subcarpeta con el mismo nombre.
 
 ---
 
@@ -52,19 +53,19 @@ Esto permite validar que el AHK principal esté dentro de una subcarpeta con el 
 1. Verifica que Ahk2Exe.exe está junto al compilador.
 2. Verifica que el AHK ha sido guardado.
 3. Si RutaGeneral está definido:
-4. Comprueba que el AHK principal esté en la carpeta adecuada.
-5. Comprueba que el .exe fue generado en esta sesión.
+3.1. Comprueba que el AHK principal está en la carpeta adecuada.
+3.2. Comprueba que el .exe fue generado en esta sesión.
 
 ---
 
-## 🚦 Códigos de salida
+## 🚦Códigos de salida
 
 Código	Significado
 - `0`: Compilación exitosa  
 - `1`: Error de subcarpeta (RutaGeneral)  
 - `2`: No se generó el `.exe`  
 - `3`: El archivo AHK no existe o no fue guardado  
-- `4`: VSCompilerAHK no está junto a Ahk2Exe.exe
+- `4`: VSCompilerAHK no est谩 junto a Ahk2Exe.exe
 
 ---
 
@@ -98,10 +99,10 @@ Debes configurar en visual Studio Code la directiva para Code Runner de la sigui
 1. Pulsa Ctrl+Shift+P
 2. Teclea "Preferencias: Abir configuración de usuario (JSON)"
 3. Pincha sobre ella y te aparecerá la ventana "settings.json"
-4. Antes de la última llave ( } ) ingresa
+4. Antes de la última llave "}" ingresa
 ```json
 "code-runner.executorMap": {
 	"ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
 }
-ajustando la ruta D:\Autohotkey\Compiler a donde resida tu Ahk2Exe.exe
+ajustando la ruta D:\Autohotkey\Compiler a donde resida realmente tu Ahk2Exe.exe
 

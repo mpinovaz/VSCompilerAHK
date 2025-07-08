@@ -1,11 +1,18 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
 ;
+;	Autocompilación
+;
+Compiler:= "Ahk2Exe.exe"
+If ( ! A_IsCompiled ) {
+	Autocompilacion()
+}
+;
 ;	Comprobamos que VSCompilerAHK.exe reside donde Ahk2Exe.exe
 ;
-Compiler:= A_ScriptDir "\Ahk2Exe.exe"
+
 If ( ! FileExist(Compiler) ) {
-	ConsolaVSC("❌ No se encuentra el compilador Ahk2Exe.exe junto a VSCompilerAHK.exe.`nCancelado.", 4)
+	ConsolaVSC("❌ No se encuentra el compilador " Compiler " junto a VSCompilerAHK.exe.`nCancelado.", 4)
 }
 ;
 ;	Comprobamos que el AHK a compilar existe (básicamente que fue guardado)
@@ -68,4 +75,30 @@ ConsolaVSC(Mensaje, Error:= 0) {
 LeerCFG(clave) {
     archivo := A_ScriptDir "\VSCompilerAHK.cfg"
     return FileExist(archivo) ? IniRead(archivo, "", clave, "") : ""
+}
+;=========================================
+;	Autocompilación
+;=========================================
+Autocompilacion() {
+	Nombre    := "VSCompilerAHK"
+	NombreAHK := Nombre ".ahk"
+	NombreEXE := Nombre ".exe"
+	if ! FileExist(Compiler) {
+		MsgBox( "Has de disponer " NombreAHK " donde resida " Compiler ".`nCancelado")
+		ExitApp 10
+	}
+	If FileExist(NombreEXE) {
+		MsgBox( NombreAHK " está pensado para ser ejecutado si no existe " NombreEXE ".`nCancelado")
+		ExitApp 10
+	}
+	Tooltip "Generando " NombreEXE "..."
+	RunWait(Compiler " /in " NombreAHK)
+	Tooltip
+	if FileExist(NombreEXE) {
+		MsgBox "Compilador generado correctamente."
+		ExitApp 0
+	} else {
+		MsgBox "Error al generar el compilador."
+		ExitApp 1
+	}
 }
