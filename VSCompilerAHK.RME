@@ -1,144 +1,35 @@
-===========================================================================
-📦 VSCompilerAHK — Sistema de compilación de AHK's para Visual Studio Code
-===========================================================================
+===================================
+	VSCompilerAHK — Instalación
+===================================
 
-✍️ Autor: M.Pino (con asistencia de Copilot)
+Ubicación necesaria:
+Todos los archivos deben estar en la misma carpeta que Ahk2Exe.exe
 
-🗓️ Última versión: julio 2025
+Archivos necesarios:
+- VSCompilerAHK.ahk
+- VSCompilerAHK.cfg   ← opcional (RutaGeneral=d:\AHK Proyectos)
+- VSCompilerAHK.RME   ← opcional (este documento)
 
-🔧 Requisitos:
-	1. AutoHotkey v2.0 y VS Code con extensiones:
-		AutoHotkey v2 Language Support y
-		Code Runner
-	2. Disponer los archivos de esta utilidad en la misma carpeta en la
-	   que resida el compilador Ahk2Exe.exe, es decir los archivos:
-		VSCompilerAHK.exe,
-		VSCompilerAHK.cfg (opcional) y
-		VSCompilerAHK.RME (opcional)
-	3. Definir en VS Code el settings.json con la directiva para
-	   compilación de los AHK's:
-	  	"code-runner.executorMap": {
-			"ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
-		}
-	   D:\Autohotkey\Compiler sería donde reside Ahk2Exe.exe
+Pasos:
+1. Coloca estos archivos junto a Ahk2Exe.exe
+2. Ejecuta VSCompilerAHK.ahk → generará VSCompilerAHK.exe
+3. Configura Visual Studio Code con la directiva de Code Runner
 
-📌 DESCRIPCIÓN
+4. Una vez obtenido VSCompilerAHK.exe ya no es necesario VSCompilerAHK.ahk,
+	salvo para analizarlo y proponeme mejoras.
 
-Este script automatiza la compilación de archivos AHK's con `Ahk2Exe.exe`
-y muestra mensajes de estado únicamente en la consola de salida de VS Code.
+--------------------------------------
+Directiva para Code Runner en VS Code:
+--------------------------------------
 
-Valida estructura de proyecto, verifica que el `.exe` ha sido 
-efectivamente generado, y permite configurar ruta general de proyectos a
-través del archivo `VSCompilerAHK.cfg`.
+Pulsa Ctrl+Shift+P → “Preferencias: Abrir configuración de usuario (JSON)”
 
----------------------------------------------------------------------------
+Antes de la última llave `}` ingresa lo siguiente:
 
-⚙️ ARCHIVO DE CONFIGURACIÓN
-
-Nombre: 	`VSCompilerAHK.cfg`
-Formato:	RutaGeneral=D:\AHK Proyectos
-
-	El archivo `VSCompilerAHK.cfg` es opcional y solo sirve para validar
-	rutas de proyectos generales del usuario.
-	Si se dispone solo tendrá la clave 'RutaGeneral' en la que se
-	especificará la ruta que contiene los proyectos que elija el usuario
-	en subcarpetas con el mismo nombre que el AHK main de cada proyecto.
-	
-	Ejemplo: RutaGeneal=C:\Proyectos\Mis Proyectos AHK
-	En este ejemplo un proyecto cuyo AHK main sea 'Utilidades.ahk' deberá
-	ubicarse en la carpeta:
-		C:\Proyectos\Mis Proyectos AHK\Utilidades\
-		
-¿Para qué sirve esta condición?
-	Esta condición sirve para que en el caso de que se lance a compilar un
-	AHK que no sea el main del proyecto se cancele la compilación.
-
----------------------------------------------------------------------------
-
-🧪 VALIDACIONES AUTOMÁTICAS
-
-1. Verificación de que 'VSCompilerAHK' reside en la misma carpeta que el
-   compilador Ahk2Exe.exe.
-   
-2. Verificación que el AHK a compilar ya fue guardado por prmera vez.
-
-3. Verificación, caso de definir la clave 'RutaGeneral' en el archivo
-   'VSCompilerAHK.cfg' y el AHK reside tras [RutaGeneral], que el AHK a
-   compilar reside en la carpeta [RutaGeneral]\[proyecto]\proyecto.ahk
-   Ejemplo:
-		C:\Proyectos\Mis Proyectos AHK\Utilidades\Utilidades.ahk
-   Sirve para evitar la compilación de AHK's que no sean main del proyecto.
-   Si la ruta del AHK no comienza por [RutaGeneral] el AHK se compilará sin
-   esta validación.
-		
-4. Verificación de que el EXE se obtiene correctamente, por dos vías:
-	4.1 Que el EXE existe en la carpeta del proyecto
-	4.2 Que el EXE se ha obtenido durante la sesión de compilación, por
-		comparación de fecha-hora de inicio de la compilación y de creación
-		del EXE
-   
-Estas validaciones generán un mensaje en la consola de Visual Studio Code
-informando de qué validación no se ha superado.
-Caso de superarse todas las validaciones se observará en la consola:
-	✓ Obtenido: [Proyecto].exe
-
----------------------------------------------------------------------------
-
-🛑 CÓDIGOS DE SALIDA (ExitApp)
-
-- `0`: Éxito, compilación confirmada.
-- `1`: Error de convención de subcarpeta según [RutaGeneral].
-- `2`: No se generó el `.exe`.
-- `3`: El AHK del proyecto no existe (aún no fué guardado).
-- `4`: VSComplerAHK.exe no reside donde Ahk2Exe.exe.
-
----------------------------------------------------------------------------
-
-🧭 INTEGRACIÓN CON VS CODE
-
-Debes usar la extensiones Code Runner y AutoHotkey v2 Language para ejecutar
-directamente tu script desde el editor.
-La salida aparecerá en el panel de "OUTPUT", con mensajes legibles.
-
-Deberás configurar "Setting.json" en Visual Studio Code añadiendole
 	"code-runner.executorMap": {
-        "ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilarAHK.exe\""
-    }
-	
-La ruta "D:\Autohotkey\Compiler\VSCompilarAHK.exe" deberás ajustarla en
-función a donde resida Ahk2Exe.exe, a quien deberás acompañar
-VSCompilrAHK.exe.
+	  "ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
+	}
 
----------------------------------------------------------------------------
-
-🎯 NOTA FINAL
-
-Este script está pensado para desarrolladores ordenados, 
-con estructura de proyecto definida. No incluye globos del sistema, 
-evitando interferencias visuales y asegurando portabilidad.
-
-Si estás interesado en incluir un icono en tu proyecto no tienes más que
-incluir, en alguna parte de tu código (preferiblemente al principio del
-main del proyecto), la directiva Ahk2Exe:
-	;@Ahk2Exe-SetMainIcon [nombre].ico
-incluido el ";", y siendo [nombre] el nombre del icono, que debe incluir la
-ruta completa si no reside donde el AHK main.
-
-¡Compila, valida y comunica sin molestar!
-
-───────────────────────────────────────────────────────────────────────────
-
-🤝 ASISTENCIA TECNOLÓGICA
-
-Este sistema fue diseñado y depurado con la colaboración de
-**Copilot de Microsoft**, herramienta de asistencia técnica basada en
-inteligencia artificial, capaz de ayudar en la creación, depuración y
-mejora progresiva de scripts AutoHotkey.
-
-Gracias a su capacidad para comprender lógica contextual, proponer mejoras
-precisas y facilitar documentación técnica, este script alcanzó un nivel de
-integración  y robustez difícil de lograr en sesiones aisladas.
-
-Más información sobre Copilot:
-https://copilot.microsoft.com
-
+⚠️	Recuerda ajustar la ruta según la ubicación real del compilador,
+	es decir, sustituye D:\Autohotkey\Compiler por la ruta donde
+	reside Ahk2Exe.exe
