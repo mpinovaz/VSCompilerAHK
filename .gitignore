@@ -1,0 +1,12 @@
+# Ignorar tipos de archivo no necesarios para subir al repositorio
+*.bat
+*.reg
+*.txt
+
+# Ignorar todos los .exe... excepto el compilador que sí se subirá
+*.exe
+!VSCompilerAHK.exe
+
+# Ignorar archivos de respaldo ocasionales
+*.bak
+*.tmp
