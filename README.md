@@ -60,11 +60,11 @@ Esto permite validar que el AHK principal esté dentro de una subcarpeta con el 
 ## 🚦 Códigos de salida
 
 Código	Significado
-  0		Compilación exitosa
-  1		Error de subcarpeta (RutaGeneral)
-  2		No se generó el .exe
-  3		El archivo AHK no existe o no fue guardado
-  4		VSCompilerAHK no está junto a Ahk2Exe.exe
+- `0`: Compilación exitosa  
+- `1`: Error de subcarpeta (RutaGeneral)  
+- `2`: No se generó el `.exe`  
+- `3`: El archivo AHK no existe o no fue guardado  
+- `4`: VSCompilerAHK no está junto a Ahk2Exe.exe
 
 ---
 
@@ -102,7 +102,7 @@ Debes configurar en visual Studio Code la directiva para Code Runner de la sigui
 ```json
 "code-runner.executorMap": {
 	"ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
-}"
+}
 ajustando la ruta D:\Autohotkey\Compiler a donde resida tu Ahk2Exe.exe
 
 ---
