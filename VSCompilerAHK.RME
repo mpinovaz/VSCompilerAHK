@@ -1,0 +1,35 @@
+===================================
+	VSCompilerAHK — Instalación
+===================================
+
+Ubicación necesaria:
+Todos los archivos deben estar en la misma carpeta que Ahk2Exe.exe
+
+Archivos necesarios:
+- VSCompilerAHK.ahk
+- VSCompilerAHK.cfg   ← opcional (RutaGeneral=d:\AHK Proyectos)
+- VSCompilerAHK.RME   ← opcional (este documento)
+
+Pasos:
+1. Coloca estos archivos junto a Ahk2Exe.exe
+2. Ejecuta VSCompilerAHK.ahk → generará VSCompilerAHK.exe
+3. Configura Visual Studio Code con la directiva de Code Runner
+
+4. Una vez obtenido VSCompilerAHK.exe ya no es necesario VSCompilerAHK.ahk,
+	salvo para analizarlo y proponeme mejoras.
+
+--------------------------------------
+Directiva para Code Runner en VS Code:
+--------------------------------------
+
+Pulsa Ctrl+Shift+P → “Preferencias: Abrir configuración de usuario (JSON)”
+
+Antes de la última llave `}` ingresa lo siguiente:
+
+	"code-runner.executorMap": {
+	  "ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
+	}
+
+⚠️	Recuerda ajustar la ruta según la ubicación real del compilador,
+	es decir, sustituye D:\Autohotkey\Compiler por la ruta donde
+	reside Ahk2Exe.exe
