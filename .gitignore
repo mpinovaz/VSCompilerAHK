@@ -1,5 +1,6 @@
 # Ignorar tipos de archivo no necesarios para subir al repositorio
 *.exe
 *.bat
+*.txt
 *.bak
 *.tmp
