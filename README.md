@@ -65,14 +65,14 @@ Código	Significado
 - `1`: Error de subcarpeta (RutaGeneral)  
 - `2`: No se generó el `.exe`  
 - `3`: El archivo AHK no existe o no fue guardado  
-- `4`: VSCompilerAHK no est谩 junto a Ahk2Exe.exe
+- `4`: VSCompilerAHK no está junto a Ahk2Exe.exe
 
 ---
 
 ## 🧭 Integración con VS Code
 
-La salida aparece en el panel OUTPUT.
-Mensajes claros, sin globos ni interrupciones visuales.
+- La salida aparece en el panel OUTPUT de VS Code.
+- Mensajes claros, sin globos ni interrupciones visuales.
 
 ---
 
@@ -104,6 +104,6 @@ Debes configurar en visual Studio Code la directiva para Code Runner de la sigui
 "code-runner.executorMap": {
 	"ahk2": "\"D:\\Autohotkey\\Compiler\\VSCompilerAHK.exe\""
 }
-
+```
 ajustando la ruta D:\Autohotkey\Compiler a donde resida realmente tu Ahk2Exe.exe
 
